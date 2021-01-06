@@ -5,13 +5,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using TwitterClone.Database.DataAccessLayer;
 
-namespace FeedAPI
+namespace TwitterClone.Database
 {
     public class Startup
     {
@@ -31,14 +32,14 @@ namespace FeedAPI
                 options.AddPolicy(name: AllowedOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200");
+                        builder.WithOrigins("http://localhost:8080", "http://localhost:4200");
                     });
             });
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddDbContext<TwitterCloneDbContext>(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FeedAPI", Version = "v1" });
+                options.UseSqlite("Data Source=twitter.db");
             });
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,8 +48,6 @@ namespace FeedAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FeedAPI v1"));
             }
 
             app.UseRouting();
@@ -56,6 +55,7 @@ namespace FeedAPI
             app.UseAuthorization();
 
             app.UseCors(AllowedOrigins);
+
 
             app.UseEndpoints(endpoints =>
             {

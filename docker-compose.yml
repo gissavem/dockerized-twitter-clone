@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  feedapi:
+    container_name: feedapi
+    build: 
+      context: ./TwitterClone.FeedAPI/FeedAPI
+    image: feedapi:latest
+    ports:
+      - "8080:80"
+    environment:
+      - DB_URI=http://database:80
+    depends_on:
+      - database
+    networks:
+      - twitter-clone
+
+  database:
+    container_name: database
+    build: 
+      context: ./TwitterClone.Database
+    image: database:latest  
+    ports:
+      - "13337:80"
+    networks:
+      - twitter-clone
+
+  angularapp:
+    container_name: angularapp
+    build: 
+      context: ./TwitterClone.Angular
+    image: angularapp:latest
+    ports: 
+      - "4200:80"
+    networks:
+      - twitter-clone
+
+networks:
+  twitter-clone:
+    external: true

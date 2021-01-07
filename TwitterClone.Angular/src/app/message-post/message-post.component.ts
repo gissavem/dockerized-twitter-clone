@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MessageService } from '../shared/message.service';
 
 @Component({
@@ -9,6 +9,16 @@ import { MessageService } from '../shared/message.service';
 export class MessagePostComponent implements OnInit {
 
   constructor(private messageService: MessageService) { }
+  @Output() successfulPost = new EventEmitter();
+
+  onPostSuccess(){
+    this.successfulPost.emit()
+  }
+
+  onPostFailure(response){
+    console.log("something went wrong...");
+    console.log(response);
+  }
 
   ngOnInit(): void {
   }
@@ -16,10 +26,10 @@ export class MessagePostComponent implements OnInit {
     this.messageService.postMessage(content, author)
       .subscribe((response) => {
         if(response.statusText === "OK"){
-          console.log(response.body);
+          this.onPostSuccess();
         }
         else{
-          console.log("Something went wrong")
+          this.onPostFailure(response);
         }
       }
       );

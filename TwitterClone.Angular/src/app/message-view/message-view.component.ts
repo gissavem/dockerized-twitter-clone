@@ -15,6 +15,10 @@ export class MessageViewComponent implements OnInit {
   messages$: Observable<Message[]>;
 
   ngOnInit(): void {
+    this.getMessages();
+  }
+
+  getMessages(): void {
     this.messages$ = this.messageService.getMessages();
   }
 

@@ -1,4 +1,4 @@
 <div class="message-board">
-    <app-message-post></app-message-post>
-    <app-message-view></app-message-view>
+    <app-message-post (successfulPost)="messageView.getMessages()"></app-message-post>
+    <app-message-view #messageView></app-message-view>
 </div>

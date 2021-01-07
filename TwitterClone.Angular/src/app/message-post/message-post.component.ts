@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MessageService } from '../shared/message.service';
 
@@ -8,30 +9,46 @@ import { MessageService } from '../shared/message.service';
 })
 export class MessagePostComponent implements OnInit {
 
-  constructor(private messageService: MessageService) { }
+  errors: string[];
+  constructor(private messageService: MessageService) {
+
+   }
   @Output() successfulPost = new EventEmitter();
+  
+  ngOnInit(): void {
+    this.errors = [];
+  }
 
   onPostSuccess(){
     this.successfulPost.emit()
   }
 
-  onPostFailure(response){
-    console.log("something went wrong...");
-    console.log(response);
+  onPostFailure(){
+    console.log(this.errors);
   }
 
-  ngOnInit(): void {
-  }
+ 
   postComment(content:string, author:string){
+    this.errors = [];
     this.messageService.postMessage(content, author)
-      .subscribe((response) => {
+      .subscribe(
+        (response) => {
         if(response.statusText === "OK"){
           this.onPostSuccess();
-        }
-        else{
-          this.onPostFailure(response);
-        }
+        }}, 
+        (httpError) => {
+            if (httpError.status === 400) {
+              this.transformErrors(httpError.error.errors);
+              this.onPostFailure();
+              }
+        });
+  }
+  transformErrors(errorObject): void{
+    for(var fieldName in errorObject){
+      if (errorObject.hasOwnProperty(fieldName)) {
+        this.errors.push(errorObject[fieldName][0]);
       }
-      );
+    }
   }
 }
+

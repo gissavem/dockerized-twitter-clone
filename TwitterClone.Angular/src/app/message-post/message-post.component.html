@@ -2,4 +2,10 @@
     <textarea placeholder="Write to the world..." name="contentBox" #contentArea cols="30" rows="10" class="p-1em"></textarea>
     <input type="text" #authorField placeholder="Your name.." class="mt-025em p-05em">
     <button (click)="postComment(contentArea.value, authorField.value)" class="p-1em mt-025em"> Post comment</button>
+    <div *ngIf="errors.length > 0" class="error-box mt-025em">
+        <span *ngFor="let error of errors">
+            {{error}}
+            <br>
+        </span>
+    </div>
 </div>

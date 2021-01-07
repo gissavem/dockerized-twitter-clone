@@ -1,6 +1,6 @@
 <div class="message-feed">
-    <h5>Messages</h5>
-    <div *ngFor="let currentMessage of messages$ | async">
-        <app-message [message]="currentMessage"></app-message>
-    </div>    
+    <app-message 
+        *ngFor="let currentMessage of messages$ | async" 
+        [message]="currentMessage" >
+    </app-message>
 </div>

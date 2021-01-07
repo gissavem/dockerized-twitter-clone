@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
 import { MessageAdapter } from './message';
 import { environment } from 'src/environments/environment';
 
@@ -26,6 +26,8 @@ export class MessageService {
       "content": content,
       "author" : author
     }
-    return this.http.post(this.apiUrl+"/message",body, { observe: 'response' })
-  }
+    return this.http
+      .post(this.apiUrl+"/message",body, { observe: 'response' });
+    }
 }
+

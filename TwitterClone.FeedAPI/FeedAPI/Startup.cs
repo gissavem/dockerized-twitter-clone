@@ -31,7 +31,7 @@ namespace FeedAPI
                 options.AddPolicy(name: AllowedOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200");
+                        builder.WithOrigins("http://localhost:4200", "http://angularapp:80");
                     });
             });
             services.AddControllers();

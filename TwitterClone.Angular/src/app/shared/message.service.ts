@@ -16,7 +16,7 @@ export class MessageService {
   
   apiUrl: string;
   getMessages(): Observable<any>{
-    return this.http.get(this.apiUrl + "/weatherforecast",).pipe(
+    return this.http.get(this.apiUrl + "/post",).pipe(
       map ((data: any[]) => data.map((item: any) => this.adapter.adapt(item)) ));
   }
 

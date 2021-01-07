@@ -19,11 +19,10 @@ namespace FeedAPI.Controllers
         public async Task<ActionResult> Get()
         {
             var dbURI = Environment.GetEnvironmentVariable(DbUri);
+            dbURI += "/weatherforecast";
 
-            string cool;
             try
             {
-
                 var client = new RestClient(dbURI);
                 var request = new RestRequest();
 
@@ -37,10 +36,5 @@ namespace FeedAPI.Controllers
                 throw;
             }
         }
-    }
-
-    public class Post
-    {
-        public string Id { get; set; }
     }
 }

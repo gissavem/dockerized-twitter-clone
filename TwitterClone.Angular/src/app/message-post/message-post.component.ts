@@ -12,8 +12,8 @@ export class MessagePostComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  postComment(value:string){
-    this.messageService.postMessage(value)
+  postComment(content:string, author:string){
+    this.messageService.postMessage(content, author)
       .subscribe((response) => {
         if(response.statusText === "OK"){
           console.log(response.body);

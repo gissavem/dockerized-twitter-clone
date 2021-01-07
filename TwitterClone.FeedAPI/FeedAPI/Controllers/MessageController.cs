@@ -14,7 +14,7 @@ namespace FeedAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PostController : ControllerBase
+    public class MessageController : ControllerBase
     {
         private const string DbUri = "DB_URI";
         [HttpGet]
@@ -63,7 +63,7 @@ namespace FeedAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] MessageDTO message)
+        public ActionResult Post([FromBody] MessageDTO message)
         {
             var dbURI = Environment.GetEnvironmentVariable(DbUri);
             try
@@ -79,13 +79,13 @@ namespace FeedAPI.Controllers
                 var response = client.Execute(request);
                 Console.WriteLine(response.ErrorMessage);
                 Debug.WriteLine(response.ErrorMessage);
-                return Ok(response);
+                return Ok(response.Content);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 Debug.WriteLine(e.Message);
-                throw;
+                return StatusCode(500);
             }
         }
     }

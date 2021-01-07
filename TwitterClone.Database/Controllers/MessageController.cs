@@ -21,6 +21,7 @@ namespace TwitterClone.Database.Controllers
         [HttpGet]
         public ActionResult Get()
         {
+            twitterCloneDbContext.Database.EnsureCreated();
             return Ok(twitterCloneDbContext.Messages);
         }
 

@@ -37,7 +37,7 @@ namespace TwitterClone.Database
             });
             services.AddDbContext<TwitterCloneDbContext>(options =>
             {
-                options.UseSqlite("Data Source=twitter.db");
+                options.UseSqlite("Data Source=database/twitter.db");
             });
             services.AddControllers();
         }

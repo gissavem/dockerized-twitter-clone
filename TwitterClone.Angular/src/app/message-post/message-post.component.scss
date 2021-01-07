@@ -1,4 +1,14 @@
 .message-form{
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+}
+.p-1em{
+    padding: 1em;
+}
+.p-05em{
+    padding: 0.5em;
+}
+.mt-1em{
+    margin-top: 1em;
 }

@@ -11,7 +11,7 @@ namespace TwitterClone.Database.DataAccessLayer
         public TwitterCloneDbContext(DbContextOptions<TwitterCloneDbContext> options) : base(options)
         {
         }
-        public DbSet<Post> Posts { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 
 }

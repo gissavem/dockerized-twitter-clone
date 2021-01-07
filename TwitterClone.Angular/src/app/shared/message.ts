@@ -5,7 +5,7 @@ export class Message{
     constructor(
         public author: string,
         public content: string,
-        public posted: Date){}
+        public postDate: Date){}
 }
 
 @Injectable({
@@ -13,6 +13,6 @@ export class Message{
   })
   export class MessageAdapter implements Adapter<Message> {
     adapt(item: any): Message {
-      return new Message(item.author, item.content, item.posted);
+      return new Message(item.author, item.content, item.postDate);
     }
   }

@@ -1,5 +1,5 @@
-<div class="message-form">
-    <textarea name="contentBox" #contentArea cols="30" rows="10" class="p-1em mt-1em"></textarea>
-    <input type="text" #authorField placeholder="Author">
-    <button (click)="postComment(contentArea.value, authorField.value)" class="p-05em mt-1em"> Post comment</button>
+<div class="message-form p-05em">
+    <textarea placeholder="Write to the world..." name="contentBox" #contentArea cols="30" rows="10" class="p-1em"></textarea>
+    <input type="text" #authorField placeholder="Your name.." class="mt-025em p-05em">
+    <button (click)="postComment(contentArea.value, authorField.value)" class="p-1em mt-025em"> Post comment</button>
 </div>

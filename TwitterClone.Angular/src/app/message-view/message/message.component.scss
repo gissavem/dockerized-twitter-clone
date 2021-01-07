@@ -10,9 +10,10 @@ blockquote.tweet {
     border-style: solid;
     border-width: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-    margin: 10px 5px;
-    padding: 0 16px 16px 16px;
+    margin: 10px 2px;
+    padding: 0 16px 16px 8px;
     max-width: 468px;
+    min-width: 468px;
     background-color: whitesmoke;
   }
   

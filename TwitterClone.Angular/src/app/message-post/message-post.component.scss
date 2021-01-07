@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    background-color: whitesmoke;
+    box-shadow: 2px 7px 18px #888888;
 }
 .p-1em{
     padding: 1em;
@@ -11,4 +13,7 @@
 }
 .mt-1em{
     margin-top: 1em;
+}
+.mt-025em{
+    margin-top: .25em;
 }

@@ -1,4 +1,5 @@
 <div class="message-form">
     <textarea name="contentBox" #contentArea cols="30" rows="10" class="p-1em mt-1em"></textarea>
-    <button (click)="postComment(contentArea.value)" class="p-05em mt-1em"> Post comment</button>
+    <input type="text" #authorField placeholder="Author">
+    <button (click)="postComment(contentArea.value, authorField.value)" class="p-05em mt-1em"> Post comment</button>
 </div>

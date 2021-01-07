@@ -16,15 +16,16 @@ export class MessageService {
   
   apiUrl: string;
   getMessages(): Observable<any>{
-    return this.http.get(this.apiUrl + "/post",).pipe(
+    return this.http.get(this.apiUrl + "/message",).pipe(
       map ((data: any[]) => data.map((item: any) => this.adapter.adapt(item)) ));
   }
 
-  postMessage(value: string): Observable<any>{
+  postMessage(content: string, author: string): Observable<any>{
     let body = 
     {
-      "content": value
+      "content": content,
+      "author" : author
     }
-    return this.http.post(this.apiUrl+"/",body, { observe: 'response' })
+    return this.http.post(this.apiUrl+"/message",body, { observe: 'response' })
   }
 }

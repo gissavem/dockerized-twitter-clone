@@ -32,7 +32,9 @@ namespace TwitterClone.Database
                 options.AddPolicy(name: AllowedOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("http://angularapp:80", "http://feedapi:80");
+                        builder.WithOrigins("http://feedapi:80")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
                     });
             });
             services.AddDbContext<TwitterCloneDbContext>(options =>

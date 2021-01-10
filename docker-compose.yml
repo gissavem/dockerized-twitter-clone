@@ -20,8 +20,6 @@ services:
     build: 
       context: ./TwitterClone.Database
     image: database:latest  
-    ports:
-      - "13337:80"
     networks:
       - twitter-clone
     volumes: 
@@ -39,7 +37,7 @@ services:
 
 networks:
   twitter-clone:
-    external: true
+    external: false
 
 volumes:
   twitter-clone-volume:

@@ -9,7 +9,7 @@ services:
     ports:
       - "8080:80"
     environment:
-      - DB_URI=http://database:80
+      Database__BaseUri: "http://database:80"
     depends_on:
       - database
     networks:

@@ -41,12 +41,14 @@ namespace TwitterClone.Database
             {
                 options.UseSqlite("Data Source=database/twitter.db");
             });
+            
             services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, TwitterCloneDbContext dbContext)
         {
+            EnsureDatabaseCreated(dbContext);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -63,6 +65,11 @@ namespace TwitterClone.Database
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void EnsureDatabaseCreated(TwitterCloneDbContext twitterCloneDbContext)
+        {
+            twitterCloneDbContext.Database.EnsureCreated();
         }
     }
 }

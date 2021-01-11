@@ -14,6 +14,7 @@ export class MessagePostComponent implements OnInit {
 
    }
   @Output() successfulPost = new EventEmitter();
+  loading: boolean;
   
   ngOnInit(): void {
     this.errors = [];
@@ -21,14 +22,11 @@ export class MessagePostComponent implements OnInit {
 
   onPostSuccess(){
     this.successfulPost.emit()
+    this.loading = false;
   }
-
-  onPostFailure(){
-    console.log(this.errors);
-  }
-
  
   postComment(content:string, author:string){
+    this.loading = true;
     this.errors = [];
     this.messageService.postMessage(content, author)
       .subscribe(
@@ -37,9 +35,9 @@ export class MessagePostComponent implements OnInit {
           this.onPostSuccess();
         }}, 
         (httpError) => {
+            this.loading = false;
             if (httpError.status === 400) {
               this.transformErrors(httpError.error.errors);
-              this.onPostFailure();
               }
         });
   }

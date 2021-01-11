@@ -21,29 +21,74 @@ namespace TwitterClone.Database.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            twitterCloneDbContext.Database.EnsureCreated();
-            return Ok(twitterCloneDbContext.Messages);
+            try
+            {
+                return Ok(twitterCloneDbContext.Messages);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpGet]
         [Route("{id}")]
         public ActionResult GetWithId(int id)
         {
-            return Ok(twitterCloneDbContext.Messages.SingleOrDefault(Message => Message.Id == id));
+            try
+            {
+                var message = twitterCloneDbContext.Messages.SingleOrDefault(message => message.Id == id);
+                if (message is null)
+                {
+                    return NotFound();
+                }
+                return Ok(message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpPost]
         public ActionResult Post([FromBody] MessageDTO message)
         {
-            var messageToAdd = new Message
+            try
             {
-                Author = message.Author,
-                Content = message.Content,
-                PostDate = DateTime.Now
-            };
-            twitterCloneDbContext.Add(messageToAdd);
-            twitterCloneDbContext.SaveChanges();
-            return Ok();
+                var messageToAdd = new Message
+                {
+                    Author = message.Author,
+                    Content = message.Content,
+                    PostDate = DateTime.Now
+                };
+                twitterCloneDbContext.Add(messageToAdd);
+                twitterCloneDbContext.SaveChanges();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+        [HttpDelete]
+        [Route("{id}")]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                var messageToRemove = twitterCloneDbContext.Messages.SingleOrDefault(message => message.Id == id);
+                if (messageToRemove is null)
+                {
+                    return NotFound();
+                }
+                twitterCloneDbContext.Messages.Remove(messageToRemove);
+                twitterCloneDbContext.SaveChanges();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

@@ -68,7 +68,7 @@ namespace FeedAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] MessageDTO message)
+        public ActionResult Post([FromBody] PostMessageDTO postMessage)
         {
             try
             {
@@ -77,8 +77,8 @@ namespace FeedAPI.Controllers
                 request.AddHeader("Accept", "application/json");
                 request.AddJsonBody(new
                 {
-                    message.Content,
-                    message.Author
+                    postMessage.Content,
+                    postMessage.Author
                 });
                 var response = client.Execute(request);
                 return Ok(response.Content);
@@ -89,7 +89,7 @@ namespace FeedAPI.Controllers
             }
         }
         [HttpDelete]
-        public ActionResult Delete([FromBody]DeleteRequest deleteRequest)
+        public ActionResult Delete([FromBody]DeleteMessageDTO deleteRequest)
         {
             try
             {
@@ -114,10 +114,5 @@ namespace FeedAPI.Controllers
                 return StatusCode(500);
             }
         }
-    }
-
-    public class DeleteRequest
-    {
-        public string Content{ get; set; }
     }
 }

@@ -51,14 +51,14 @@ namespace TwitterClone.Database.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] MessageDTO message)
+        public ActionResult Post([FromBody] PostMessageDTO postMessage)
         {
             try
             {
                 var messageToAdd = new Message
                 {
-                    Author = message.Author,
-                    Content = message.Content,
+                    Author = postMessage.Author,
+                    Content = postMessage.Content,
                     PostDate = DateTime.Now
                 };
                 twitterCloneDbContext.Add(messageToAdd);
@@ -71,11 +71,11 @@ namespace TwitterClone.Database.Controllers
             }
         }
         [HttpDelete]
-        public ActionResult Delete([FromBody]DeleteRequest deleteRequest)
+        public ActionResult Delete([FromBody]DeleteMessageDTO deleteMessageDto)
         {
             try
             {
-                var messageToRemove = twitterCloneDbContext.Messages.SingleOrDefault(message => message.Content == deleteRequest.Content);
+                var messageToRemove = twitterCloneDbContext.Messages.SingleOrDefault(message => message.Content == deleteMessageDto.Content);
                 if (messageToRemove is null)
                 {
                     return NotFound();
@@ -89,10 +89,5 @@ namespace TwitterClone.Database.Controllers
                 return StatusCode(500);
             }
         }
-    }
-
-    public class DeleteRequest
-    {
-        public string Content { get; set; }
     }
 }

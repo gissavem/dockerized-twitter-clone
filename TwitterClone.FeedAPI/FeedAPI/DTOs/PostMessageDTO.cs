@@ -1,8 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace TwitterClone.Database.DTOs
+namespace FeedAPI.DTOs
 {
-    public class MessageDTO
+    public class PostMessageDTO
     {
         [Required]
         [StringLength(300, ErrorMessage = "The content value cannot exceed 300 characters. ")]
@@ -10,6 +14,5 @@ namespace TwitterClone.Database.DTOs
         [Required]
         [StringLength(25, ErrorMessage = "The author value cannot exceed 25 characters. ")]
         public string Author { get; set; }
-        
     }
 }

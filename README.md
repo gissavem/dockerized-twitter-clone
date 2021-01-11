@@ -1,4 +1,5 @@
 ## A laboration in communication between containerized applications
+### John Andersson & Alexander Bertilsson
 
 We have made a simple web-application that enables you yo post messages, and then review all messages in a feed.
 

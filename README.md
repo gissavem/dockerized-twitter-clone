@@ -1,6 +1,8 @@
 # dockerized-twitter-clone
 ## Laboration in communication between containerized applications.
 
+We have made a simple web-application that enables you yo post messages, and then review all messages in a feed.
+
 We have chosen to use an Angular frontend that consumes an RestAPI (FeedAPI) in order to create messages in a twitter-like application. 
 FeedAPI acts as a proxy for the DatabaseAPI which handles the actual persistance.
 

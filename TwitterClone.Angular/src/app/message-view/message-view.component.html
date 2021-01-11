@@ -1,6 +1,6 @@
-<div class="message-feed" *ngIf="messages$ | async else loading">
+<div class="message-feed" *ngIf="(messages$ | async) as messages; else loading">
     <app-message 
-        *ngFor="let currentMessage of messages$ | async" 
+        *ngFor="let currentMessage of messages" 
         [message]="currentMessage" >
     </app-message>
 </div>

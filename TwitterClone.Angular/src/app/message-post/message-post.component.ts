@@ -1,5 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Message } from '../shared/message';
 import { MessageService } from '../shared/message.service';
 
 @Component({
@@ -14,12 +15,16 @@ export class MessagePostComponent implements OnInit {
 
    }
   @Output() successfulPost = new EventEmitter();
+
   loading: boolean;
   
   ngOnInit(): void {
     this.errors = [];
   }
-
+  onSubmit(f: NgForm) {
+    this.postComment(f.value.contentArea, f.value.authorField);
+    f.resetForm();
+  }
   onPostSuccess(){
     this.successfulPost.emit()
     this.loading = false;

@@ -71,12 +71,11 @@ namespace TwitterClone.Database.Controllers
             }
         }
         [HttpDelete]
-        [Route("{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete([FromBody]DeleteRequest deleteRequest)
         {
             try
             {
-                var messageToRemove = twitterCloneDbContext.Messages.SingleOrDefault(message => message.Id == id);
+                var messageToRemove = twitterCloneDbContext.Messages.SingleOrDefault(message => message.Content == deleteRequest.Content);
                 if (messageToRemove is null)
                 {
                     return NotFound();
@@ -90,5 +89,10 @@ namespace TwitterClone.Database.Controllers
                 return StatusCode(500);
             }
         }
+    }
+
+    public class DeleteRequest
+    {
+        public string Content { get; set; }
     }
 }

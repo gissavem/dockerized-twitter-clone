@@ -1,11 +1,33 @@
-<div *ngIf="!loading" class="message-form p-05em">
-    <textarea placeholder="Write to the world..." name="contentBox" #contentArea cols="30" rows="10" class="p-1em"></textarea>
-    <input type="text" #authorField placeholder="Your name.." class="mt-025em p-05em">
-    <button (click)="postComment(contentArea.value, authorField.value)" class="p-1em mt-025em"> Post comment</button>
+<form *ngIf="!loading" 
+      (ngSubmit)="onSubmit(f)"
+      class="message-form p-05em"
+      #f="ngForm">
+    <textarea 
+        #contentArea
+        id="contentArea" 
+        placeholder="Write to the world..."
+        ngModel
+        name="contentArea" 
+        rows="10" 
+        cols="30" 
+        class="p-1em"></textarea>
+    <input 
+        #authorField 
+        ngModel
+        id="authorField" 
+        name="authorField" 
+        placeholder="Your name.." 
+        type="text" 
+        class="mt-025em p-05em">
+    <button 
+        id="postButton" 
+        class="p-1em mt-025em">
+            Post comment
+    </button>
     <div *ngIf="errors.length > 0" class="error-box mt-025em">
         <span *ngFor="let error of errors">
             {{error}}
             <br>
         </span>
     </div>
-</div>
+</form>

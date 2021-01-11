@@ -74,7 +74,7 @@ namespace FeedAPI.Controllers
             {
                 var client = new RestClient(databaseUri);
                 var request = new RestRequest("/message", Method.POST, DataFormat.Json);
-                request.AddHeader("Accept", "text/plain");
+                request.AddHeader("Accept", "application/json");
                 request.AddJsonBody(new
                 {
                     message.Content,
@@ -89,13 +89,17 @@ namespace FeedAPI.Controllers
             }
         }
         [HttpDelete]
-        [Route("{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete([FromBody]DeleteRequest deleteRequest)
         {
             try
             {
-                var client = new RestClient(databaseUri + "/message/" + id);
-                var request = new RestRequest(Method.DELETE);
+                var client = new RestClient(databaseUri);
+                var request = new RestRequest("/message",Method.DELETE, DataFormat.Json);
+                request.AddHeader("Accept", "application/json");
+                request.AddJsonBody(new
+                {
+                    deleteRequest.Content
+                });
 
                 var response = client.Execute(request);
                 if (response.StatusCode == HttpStatusCode.NotFound)
@@ -110,5 +114,10 @@ namespace FeedAPI.Controllers
                 return StatusCode(500);
             }
         }
+    }
+
+    public class DeleteRequest
+    {
+        public string Content{ get; set; }
     }
 }

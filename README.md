@@ -1,5 +1,4 @@
-# dockerized-twitter-clone
-## Laboration in communication between containerized applications.
+## A laboration in communication between containerized applications
 
 We have made a simple web-application that enables you yo post messages, and then review all messages in a feed.
 

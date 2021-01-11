@@ -17,5 +17,8 @@ The docker network is created and deleted on docker-compose up/down respectively
 ###    1: cd to the root folder with the docker-compose file
 ###    2: in any shell, run `docker-compose up`
 
+## To run the e2e test: 
+###    1: cd to the root folder
+###    2: in any shell, run `cypress run`
 
 ### John Andersson & Alexander Bertilsson

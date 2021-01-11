@@ -1,5 +1,4 @@
 ## A laboration in communication between containerized applications
-### John Andersson & Alexander Bertilsson
 
 We have made a simple web-application that enables you yo post messages, and then review all messages in a feed.
 
@@ -17,3 +16,6 @@ The docker network is created and deleted on docker-compose up/down respectively
 ## To run the application: 
 ###    1: cd to the root folder with the docker-compose file
 ###    2: in any shell, run `docker-compose up`
+
+
+### John Andersson & Alexander Bertilsson
